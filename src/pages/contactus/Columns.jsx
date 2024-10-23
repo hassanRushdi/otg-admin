@@ -1,8 +1,8 @@
-import { Button } from 'antd';
+import { Button, Tag } from 'antd';
 import React from 'react';
 import { truncateText } from '../../utils/shared';
 
-export const Columns = (showMessageModal,t ) => [
+export const Columns = (showMessageModal, t) => [
     {
         title: t('first_name'),
         dataIndex: 'first_name',
@@ -17,7 +17,7 @@ export const Columns = (showMessageModal,t ) => [
         render: (text) => <div>{text}</div>,
         width: '10%',
     },
-    
+
     {
         title: t('email'),
         dataIndex: 'email',
@@ -26,26 +26,39 @@ export const Columns = (showMessageModal,t ) => [
         width: '15%',
     },
     {
-        title: t('phone'), 
+        title: t('phone'),
         dataIndex: 'phone',
         key: 'phone',
-        render: (text) => <div>{text}</div>,        width: '15%',
+        render: (text) => <div>{text}</div>,
+        width: '15%',
     },
     {
-        title: t('date_label'), 
+        title: t('date_label'),
         dataIndex: 'date',
         key: 'date',
-        render: (text) => <div>{text}</div>,        width: '20%',
+        render: (text) => <div>{text}</div>,
+        width: '20%',
     },
     {
-        title: t('message'), 
+        title: t('message'),
         dataIndex: 'message',
         key: 'message',
-        render: (text) => (
+        render: (text, repo) => (
             <div className='blog_details_data'>
-                <a onClick={() => showMessageModal(text)}>{truncateText(text, 15)}</a>
+                <a onClick={() => showMessageModal(text, repo)}>{String(text)?.split(" ").slice(0, 5).join(" ") + "..."}</a>
             </div>
         ),
         width: '20%',
-    }, 
+    },
+    {
+        title: t('status'),
+        dataIndex: 'status',
+        key: 'status',
+        render: (text) => <>{
+            text == 1 ?
+                <Tag color="green"> {t('Read')}</Tag> :
+                <Tag color="red"> {t('NotRead')} </Tag>
+        }</>,
+        width: '20%',
+    },
 ];

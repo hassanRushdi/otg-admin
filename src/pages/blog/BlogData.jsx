@@ -23,7 +23,6 @@ const BlogData = () => {
         fetchData();
     }, []);
 
-    const showModal = () => setIsModalVisible(true);
 
     const handleCancel = () => setIsModalVisible(false);
 
@@ -50,14 +49,19 @@ const BlogData = () => {
                 handleCancel={handleCancel}
             />
             <Divider plain />
+         
             <Table
                 columns={columns}
                 dataSource={data}
                 loading={loading}
                 rowKey="id"
+                pagination={{ pageSize: 8 }}
                 bordered={true}
-                scroll={{ x: '100%' }}
+                scroll={{ x: '100%' }} // scroll افقي إذا احتاج الجدول
+                size="middle" // استخدام حجم متوسط للجدول
+                className="custom-table" // إضافة كلاس خاص لتنسيقات CSS
             />
+
         </>
     );
 };

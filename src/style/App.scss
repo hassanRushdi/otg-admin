@@ -7,31 +7,91 @@ ul {
 }
 
 /* In your CSS file */
-.custom-modal-button { 
-    background: #ffffff ;
-    border-color: #d9d9d9 ;
-    color: rgba(0, 0, 0, 0.88) ;
+.custom-modal-button {
+    background: #ffffff;
+    border-color: #d9d9d9;
+    color: rgba(0, 0, 0, 0.88);
     box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
 }
 
 .custom-modal-button:hover {
     background-color: $deleteColor !important;
-    color: #ffffff ; 
+    color: #ffffff;
 }
+
 .quill {
     direction: ltr;
 }
-.ant-form-item-label{
-    label{
+
+.ant-form-item-label {
+    label {
         font-weight: 700;
     }
 }
 
-.slick-arrow .slick-prev{
-    
+.ql-snow .ql-color-picker .ql-picker-item {
+    border: 1px solid #2e3192;
+}
+
+.custom-table .ant-table-thead>tr>th {
+    background-color: #f0f0f0;
+    /* لون خلفية الرأس */
+    text-align: center;
+    /* توسيط النص */
+    font-weight: bold;
+}
+
+.custom-table .ant-table-tbody>tr>td {
+    text-align: center;
+    /* توسيط محتوى الأعمدة */
+}
+
+.custom-table .ant-table-tbody>tr:hover {
+    background-color: #e6f7ff;
+    /* لون خلفية عند تمرير الماوس */
+}
+
+.custom-table .ant-table-pagination {
+    text-align: right;
+    /* محاذاة عنصر التنقل */
 }
 
 
-.slick-arrow .slick-next{
-    
+.welcome__page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 150px);
+
+    @media screen and (width < 900px) {
+        min-height: calc(100vh - 160px);
+    }
+
+    .title_Dynamic {
+        background-color: rgba($secondColor, 0.1);
+        border: 1px solid rgba($secondColor, 0.52);
+        padding: 30px 50px;
+        box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        border-radius: 10px !important;
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: $mainColor;
+        }
+
+        @media screen and (max-width: 767px) {
+            padding: 20px 30px;
+
+            h3 {
+                font-size: 1.2rem !important;
+            }
+        }
+    }
+}
+
+.ant-table-wrapper .ant-table-pagination.ant-pagination {
+    display: flex;
+    gap: 10px;
 }

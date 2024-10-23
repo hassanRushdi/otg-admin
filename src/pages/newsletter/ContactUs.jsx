@@ -33,12 +33,14 @@ const Newsletter = () => {
         <>
             <Table
                 columns={Columns(showMessageModal, t)}
-                dataSource={data}
+                dataSource={data} 
                 loading={loading}
                 rowKey="id"
-                bordered
-                scroll={{ x: '100%' }}
-                pagination={{ pageSize: 8 }} // تحديد صفين لكل صفحة
+                pagination={{ pageSize: 8 }}
+                bordered={true}
+                scroll={{ x: '100%' }} // scroll افقي إذا احتاج الجدول
+                size="middle" // استخدام حجم متوسط للجدول
+                className="custom-table" // إضافة كلاس خاص لتنسيقات CSS
             />
             <Modal
                 title={t('full_mess')}

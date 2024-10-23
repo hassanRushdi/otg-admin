@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { fetchApiShow } from '../../utils/fetchApiShow';
 import { Columns } from './Columns';
+import axios from 'axios';
 
 const ContactUs = () => {
     const { t } = useTranslation();
@@ -19,26 +20,38 @@ const ContactUs = () => {
 
 
 
-    const showMessageModal = (message) => {
+    const showMessageModal = async (message, repo) => {
+        console.log(repo);
         setSelectedMessage(message);
         setIsModalVisible2(true);
+        let { data } = await axios.post(`https://vigtas.live/otgweb/change_contacts?contact_id=${repo.id}`)
+        console.log(data);
+
+        if (data?.status == true) {
+            fetchApiShow('contactus', setData, setLoading).then((item) => {
+                setData(item);
+            })
+        }
     };
 
     const handleModalOkShow = () => {
         setIsModalVisible2(false);
         setSelectedMessage('');
+
     };
 
     return (
         <>
             <Table
                 columns={Columns(showMessageModal, t)}
-                dataSource={data}
+                dataSource={data} 
                 loading={loading}
                 rowKey="id"
-                bordered
-                scroll={{ x: '100%' }}
-                pagination={{ pageSize: 8 }} // تحديد صفين لكل صفحة
+                pagination={{ pageSize: 8 }}
+                bordered={true}
+                scroll={{ x: '100%' }} // scroll افقي إذا احتاج الجدول
+                size="middle" // استخدام حجم متوسط للجدول
+                className="custom-table" // إضافة كلاس خاص لتنسيقات CSS
             />
             <Modal
                 title={t('full_mess')}

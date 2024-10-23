@@ -1,15 +1,16 @@
 import { DeleteOutlined } from '@ant-design/icons';
 import { showNotification } from '@utils/notification';
-import { Button } from 'antd';
+import { Button, Table } from 'antd';
 import axios from 'axios';
 
-export const Columns = (fetchData, t, wordLimit = 20) => [
+export const Columns = (fetchData, t) => [
     {
         title: t('title_en'),
         dataIndex: 'title',
         key: 'title',
         render: (text) => <div>{text}</div>,
         width: '10%',
+        ellipsis: true, // استخدام ellipsis لتقصير النص الطويل
     },
     {
         title: t('title_ar'),
@@ -17,6 +18,7 @@ export const Columns = (fetchData, t, wordLimit = 20) => [
         key: 'title_ar',
         render: (text) => <div>{text}</div>,
         width: '10%',
+        ellipsis: true,
     },
     {
         title: t('short_Desc_en_label'),
@@ -24,6 +26,7 @@ export const Columns = (fetchData, t, wordLimit = 20) => [
         key: 'short',
         render: (text) => <div>{text}</div>,
         width: '15%',
+        ellipsis: true,
     },
     {
         title: t('short_Desc_ar_label'),
@@ -31,19 +34,20 @@ export const Columns = (fetchData, t, wordLimit = 20) => [
         key: 'short_ar',
         render: (text) => <div>{text}</div>,
         width: '15%',
+        ellipsis: true,
     },
     {
         title: t('Desc_en'),
         dataIndex: 'details',
         key: 'details',
-        render: (text) => <div>{text}</div>,
+        render: (text) => <div dangerouslySetInnerHTML={{ __html: String(text).split(" ").slice(0, 5).join(" ") + "..." }} />,
         width: '20%',
     },
     {
         title: t('Desc_ar'),
         dataIndex: 'details_ar',
         key: 'details_ar',
-        render: (text) => <div>{text}</div>,
+        render: (text) => <div dangerouslySetInnerHTML={{ __html: String(text).split(" ").slice(0, 5).join(" ") + "..." }} />,
         width: '20%',
     },
     {
@@ -51,35 +55,32 @@ export const Columns = (fetchData, t, wordLimit = 20) => [
         dataIndex: 'category',
         key: 'category',
         render: (text) => <div>{text}</div>,
-        width: '25%',
+        width: '10%',
+        ellipsis: true,
     },
     {
         title: t('category_name_ar'),
         dataIndex: 'category_ar',
         key: 'category_ar',
         render: (text) => <div>{text}</div>,
-        width: '30%',
+        width: '10%',
+        ellipsis: true,
     },
     {
         key: 'actions',
         render: (text, record) => (
             <Button
-                onClick={() => {
-                    handleDeleteConfirm(record, fetchData, t)
-                }}
-                color="danger"
-                icon={< DeleteOutlined />}
+                onClick={() => handleDeleteConfirm(record, fetchData, t)}
+                icon={<DeleteOutlined />}
                 size='middle'
             />
         ),
-
+        width: '5%',
     },
 ];
 
-
-const handleDeleteConfirm = async (record, fetchData, t) => { 
+const handleDeleteConfirm = async (record, fetchData, t) => {
     let { data } = await axios.post(`https://vigtas.live/otgweb/remove_blog?blog_id=${record.id}`);
-    fetchData()
+    fetchData();
     showNotification('success', 'Delete Successful', data?.msg);
-
 };
