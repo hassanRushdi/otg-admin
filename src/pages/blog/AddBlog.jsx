@@ -2,11 +2,10 @@ import { UploadOutlined } from '@ant-design/icons';
 import DynamicForm from '@components/common/DynamicForm';
 import FooterSubmit from '@components/common/FooterSubmit';
 import BreadcrumbComponent from '@components/common/NavPages';
-import { header, showNotification } from '@utils/notification';
-import { Button, DatePicker, Form, Upload, message } from 'antd';
+import { showNotification } from '@utils/notification';
+import { Button, Form, Upload, message } from 'antd';
 import axios from 'axios';
 import { useFormik } from 'formik';
-import moment from 'moment';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import 'react-quill/dist/quill.snow.css';
@@ -81,7 +80,7 @@ const AddBlog = ({ onSuccess, handleCancel }) => {
         formik.setFieldValue('image', data);
     };
 
-    const onCoverChange = async ({ fileList }) => { // New handler for cover upload
+    const onCoverChange = async ({ fileList }) => {  
         if (fileList.length > 1) {
             message.warning('You can only upload one cover.');
             fileList = await [fileList[fileList.length - 1]];
@@ -117,7 +116,7 @@ const AddBlog = ({ onSuccess, handleCancel }) => {
 
                 <Form.Item label={t('cover')} rules={[{ required: true, message: t('cover_error') }]}>
                     <Upload beforeUpload={() => false} onChange={onCoverChange} fileList={coverList} multiple={false}>
-                        <Button icon={<UploadOutlined />}>{t('select_cover')}</Button>
+                        <Button icon={<UploadOutlined />}>{t('select_file')}</Button>
                     </Upload>
                 </Form.Item>
 

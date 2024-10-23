@@ -38,10 +38,9 @@ const Newsletter = () => {
                 rowKey="id"
                 pagination={{ pageSize: 8 }}
                 bordered={true}
-                scroll={{ x: '100%' }} // scroll افقي إذا احتاج الجدول
-                size="middle" // استخدام حجم متوسط للجدول
-                className="custom-table" // إضافة كلاس خاص لتنسيقات CSS
-            />
+                scroll={{ x: '100%' }}
+                size="middle" 
+                className="custom-table"             />
             <Modal
                 title={t('full_mess')}
                 visible={isModalVisible2}

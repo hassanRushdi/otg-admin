@@ -82,21 +82,18 @@ const DynamicForm = ({ formik, type, mode, desc, type2, blog }) => {
                 <Form.Item label={t('Desc_en')} name={mode === 'add' ? "details" : undefined}
                     rules={[{ required: true, message: t('Desc_en') }]} >
                     <ReactQuill
-
-                        style={{ height: '400px' }}
                         modules={modules}
                         value={formik.values.details}
                         onChange={(value) => formik.setFieldValue('details', value)}
-                        onBlur={() => formik.setFieldTouched('details', true)}
+                        onBlur={() => formik.setFieldTouched('details', true)} 
+
                     />
                 </Form.Item>
             </Col>
-            <Col xl={24} lg={24} xxl={24} md={12} sm={24} xs={24} className='mt-5'>
+            <Col xl={24} lg={24} xxl={24} md={12} sm={24} xs={24} className='mt-3'>
                 <Form.Item label={t('Desc_ar')} name={mode === 'add' ? "details_ar" : undefined}
                     rules={[{ required: true, message: t('Desc_ar') }]}>
-                    <ReactQuill
-                        style={{ height: '400px' }}
-
+                    <ReactQuill 
                         modules={modules}
                         value={formik.values.details_ar}
                         onChange={(value) => formik.setFieldValue('details_ar', value)}
@@ -105,7 +102,7 @@ const DynamicForm = ({ formik, type, mode, desc, type2, blog }) => {
                 </Form.Item>
             </Col>
 
-            <Col xl={12} lg={12} xxl={12} md={12} sm={24} xs={24} className='mt-5'>
+            <Col xl={12} lg={12} xxl={12} md={12} sm={24} xs={24} className='mt-3'>
                 <Form.Item name={mode === 'add' ? "category" : undefined}
                     label={t('category_name_en')} rules={[{ required: true, message: t('category_name_en') }]}>
                     <Input
@@ -116,7 +113,8 @@ const DynamicForm = ({ formik, type, mode, desc, type2, blog }) => {
                     />
                 </Form.Item>
             </Col>
-            <Col xl={12} lg={12} xxl={12} md={12} sm={24} xs={24}>
+            <Col xl={12} lg={12} xxl={12} md={12} sm={24} xs={24} className='mt-3'>
+
                 <Form.Item label={t('category_name_ar')}
                     name={mode === 'add' ? "category_ar" : undefined}
                     rules={[{ required: true, message: t('category_name_ar') }]}

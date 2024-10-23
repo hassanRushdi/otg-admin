@@ -1,6 +1,3 @@
-import { Button } from 'antd';
-import React from 'react';
-import { truncateText } from '../../utils/shared';
 
 export const Columns = (showMessageModal,t ) => [
  

@@ -1,6 +1,4 @@
-import { Button, Tag } from 'antd';
-import React from 'react';
-import { truncateText } from '../../utils/shared';
+import { Tag } from 'antd';
 
 export const Columns = (showMessageModal, t) => [
     {
@@ -51,7 +49,7 @@ export const Columns = (showMessageModal, t) => [
         width: '20%',
     },
     {
-        title: t('status'),
+        title: t('status_label'),
         dataIndex: 'status',
         key: 'status',
         render: (text) => <>{

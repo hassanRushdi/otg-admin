@@ -10,7 +10,7 @@ export const Columns = (fetchData, t) => [
         key: 'title',
         render: (text) => <div>{text}</div>,
         width: '10%',
-        ellipsis: true, // استخدام ellipsis لتقصير النص الطويل
+        ellipsis: true, 
     },
     {
         title: t('title_ar'),

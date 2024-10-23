@@ -5,7 +5,7 @@ import { Divider, Table } from 'antd';
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import AddBlog from './AddBlog';
-import { Columns } from './Columns'; // Adjust the path as needed
+import { Columns } from './Columns';  
 
 const BlogData = () => {
     let { t } = useTranslation();
@@ -57,10 +57,9 @@ const BlogData = () => {
                 rowKey="id"
                 pagination={{ pageSize: 8 }}
                 bordered={true}
-                scroll={{ x: '100%' }} // scroll افقي إذا احتاج الجدول
-                size="middle" // استخدام حجم متوسط للجدول
-                className="custom-table" // إضافة كلاس خاص لتنسيقات CSS
-            />
+                scroll={{ x: '100%' }}
+                size="middle" 
+                className="custom-table"             />
 
         </>
     );
