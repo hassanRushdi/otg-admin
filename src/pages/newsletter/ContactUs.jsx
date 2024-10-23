@@ -36,7 +36,8 @@ const Newsletter = () => {
                 dataSource={data} 
                 loading={loading}
                 rowKey="id"
-                pagination={{ pageSize: 8 }}
+                pagination={{ pageSize: 11 }}
+
                 bordered={true}
                 scroll={{ x: '100%' }}
                 size="middle" 

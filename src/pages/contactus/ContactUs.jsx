@@ -44,14 +44,14 @@ const ContactUs = () => {
         <>
             <Table
                 columns={Columns(showMessageModal, t)}
-                dataSource={data} 
+                dataSource={data}
                 loading={loading}
                 rowKey="id"
-                pagination={{ pageSize: 8 }}
+                pagination={{ pageSize: 11 }}
                 bordered={true}
                 scroll={{ x: '100%' }}
-                size="middle" 
-                className="custom-table"             />
+                size="middle"
+                className="custom-table" />
             <Modal
                 title={t('full_mess')}
                 visible={isModalVisible2}
