@@ -58,9 +58,8 @@ const AddBlog = ({ onSuccess, handleCancel }) => {
                 setLoading(false)
                 showNotification('error', 'Add Failed', data.msg);
 
-            }
-            console.log(data);
-
+            } 
+            setLoading(false)
         },
     });
 
