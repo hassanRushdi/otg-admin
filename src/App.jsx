@@ -28,6 +28,30 @@ function App() {
             { path: 'edit/:id', element: <ProtectedRoutes><Comp.EditBlog /></ProtectedRoutes> }, 
           ]
         },
+
+        {
+          path: '/attendance', children: [
+            { index: true, element: <ProtectedRoutes><Comp.AttendancePage /></ProtectedRoutes> }
+          ]
+        },
+
+        {
+          path: '/company', children: [
+            { index: true, element: <ProtectedRoutes><Comp.CompanyPage /></ProtectedRoutes> }
+          ]
+        },
+
+        {
+          path: '/user', children: [
+            { index: true, element: <ProtectedRoutes><Comp.UserPage /></ProtectedRoutes> }
+          ]
+        },
+
+        {
+          path: '/course', children: [
+            { index: true, element: <ProtectedRoutes><Comp.CoursePage /></ProtectedRoutes> }
+          ]
+        },
         
         {
           path: '/contact-us', children: [

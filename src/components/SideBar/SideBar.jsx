@@ -18,7 +18,11 @@ import {
   ProfileOutlined,
   ProjectOutlined,
   PictureOutlined,
-  MailOutlined
+  MailOutlined,
+  CalendarOutlined,
+  ScheduleOutlined,
+  BankOutlined,
+  UserOutlined
 } from '@ant-design/icons';
 import { Drawer, Layout, Menu } from 'antd';
 import React, { useContext, useState, useEffect } from 'react';
@@ -53,11 +57,16 @@ const SideBar = ({ collapsed }) => {
   }, [location.pathname]); // Re-run this effect when location changes
 
   const items = [
-    getItem(t('dashboard'), '/', <PieChartOutlined />, null, '/'),
-    getItem(t('blog'), '/blogs', <ReadOutlined />, null, '/blogs'),
-    getItem(t('contact'), '/contact-us', <PhoneOutlined />, null, '/contact-us'),
-    getItem(t('newsletter'), '/newsletter', <MailOutlined  />, null, '/newsletter'),
-
+    // getItem(t('dashboard'), '/', <PieChartOutlined />, null, '/'),
+    // getItem(t('blog'), '/blogs', <ReadOutlined />, null, '/blogs'),
+    // getItem(t('contact'), '/contact-us', <PhoneOutlined />, null, '/contact-us'),
+    // getItem(t('newsletter'), '/newsletter', <MailOutlined  />, null, '/newsletter'),
+    
+    // getItem(t('newsletter'), '/newsletter', <MailOutlined  />, null, '/newsletter'),   "Translation"
+    getItem((t('attendance')), '/attendance', <ScheduleOutlined />, null, '/attendance'),
+    getItem((t('company')), '/company', <BankOutlined />, null, '/company'),
+    getItem((t('course')), '/course', <ReadOutlined />, null, '/course'),
+    getItem((t('user')), '/user', <UserOutlined />, null, '/user'),
 
   ];
 
