@@ -10,7 +10,7 @@ import ContactUs from '@pages/contactus/ContactUs';
 import CoursePage from '@pages/course/CoursePage';
 import Home from '@pages/Dashboard/Home';
 import Newsletter from '@pages/newsletter/ContactUs';
-import UserPage from '@pages/user/UserPage';
+import StudentsPage from '@pages/students/StudentsPage';
 
 
 const Comp = {
@@ -25,7 +25,7 @@ const Comp = {
     AddBlog,
     Home,
     AttendancePage,
-    UserPage, 
+    StudentsPage, 
     CompanyPage,
     CoursePage,
 }

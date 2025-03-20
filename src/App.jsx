@@ -42,8 +42,8 @@ function App() {
         },
 
         {
-          path: '/user', children: [
-            { index: true, element: <ProtectedRoutes><Comp.UserPage /></ProtectedRoutes> }
+          path: '/students', children: [
+            { index: true, element: <ProtectedRoutes><Comp.StudentsPage /></ProtectedRoutes> }
           ]
         },
 

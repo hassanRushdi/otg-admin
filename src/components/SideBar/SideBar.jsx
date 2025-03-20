@@ -66,7 +66,7 @@ const SideBar = ({ collapsed }) => {
     getItem((t('attendance')), '/attendance', <ScheduleOutlined />, null, '/attendance'),
     getItem((t('company')), '/company', <BankOutlined />, null, '/company'),
     getItem((t('course')), '/course', <ReadOutlined />, null, '/course'),
-    getItem((t('user')), '/user', <UserOutlined />, null, '/user'),
+    getItem((t('students')), '/students', <UserOutlined />, null, '/students'),
 
   ];
 
