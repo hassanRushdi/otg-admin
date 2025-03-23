@@ -39,3 +39,34 @@ export const editStudentData = async (studentId, studentData) => {
     return false;
   }
 };
+
+
+export const changeStudentPassword = async (studentId, currentPassword, newPassword) => {
+  try {
+    const response = await axios.post(
+      `${API_BASE_URL}/Admin-change-student-password/${studentId}`,
+      new URLSearchParams({
+        current_password: currentPassword,
+        new_password: newPassword,
+      }).toString(), 
+      {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      }
+    );
+
+    console.log("API Response:", response.data); 
+
+    if (response.status === 200) {
+      if (response.data.success) {
+        return { success: true, message: response.data.message || "Password changed successfully!" };
+      } else {
+        return { success: false, message: response.data.message || "Failed to change password." };
+      }
+    } else {
+      return { success: false, message: "Unexpected server response." };
+    }
+  } catch (error) {
+    console.error("Error changing password:", error);
+    return { success: false, message: "Something went wrong. Please try again." };
+  }
+};

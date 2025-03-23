@@ -83,7 +83,7 @@ export const Columns = (onUpdate, handleBan, handleDelete) => [
             {/* <Button type="primary" icon={<EditOutlined />} onClick={() => handleEdit(record)}>
               {t("Change Password")}
             </Button> */}
-            <ChangePasswordModal />
+            <ChangePasswordModal student={record} />
     
             <Popconfirm
               title={record.banned ? t("Unban this student?") : t("Ban this student?")}
