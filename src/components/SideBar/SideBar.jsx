@@ -113,7 +113,7 @@ const SideBar = ({ collapsed }) => {
         >
           <div className="demo-logo-vertical">
             <Link to={'/'}>
-              <img src={!collapsed ? img.logoTrain : img.logoSm} alt="" width={!collapsed ? 150 : 40} />
+              <img src={!collapsed ? img.logoTrain : img.logoSmall} alt="" width={!collapsed ? 150 : 40} />
             </Link>
           </div>
           <Menu
