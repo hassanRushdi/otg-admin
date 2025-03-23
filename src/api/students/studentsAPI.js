@@ -19,3 +19,23 @@ export const getStudents = async () => {
     return [];
   }
 };
+
+export const editStudentData = async (studentId, studentData) => {
+  try {
+    const formData = new FormData();
+    Object.keys(studentData).forEach((key) => {
+      formData.append(key, studentData[key]);
+    });
+
+    const response = await axios.post(`${API_BASE_URL}/update-registered-students/${studentId}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    return response.status === 200;
+  } catch (error) {
+    console.error("Error updating student:", error);
+    return false;
+  }
+};

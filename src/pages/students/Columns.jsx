@@ -2,9 +2,10 @@ import { t } from "i18next";
 import { Button, Space, Popconfirm, Avatar } from "antd";
 import { EditOutlined, DeleteOutlined, StopOutlined, CheckOutlined } from "@ant-design/icons";
 import ChangePasswordModal from "@components/common/ChangePasswordModal";
+import EditStudentModal from "@components/common/EditStudentModal";
 
 
-export const Columns = (handleEdit, handleBan, handleDelete) => [
+export const Columns = (onUpdate, handleBan, handleDelete) => [
   {
     title: t("Profile Image"),
     dataIndex: "student_image",
@@ -20,12 +21,12 @@ export const Columns = (handleEdit, handleBan, handleDelete) => [
       );
     },
   },
-    {
-        title: t("ID"),
-        dataIndex: "student_id",
-        key: "student_id",
-        render: (text) => <div>{text}</div>,
-      },
+    // {
+    //     title: t("ID"),
+    //     dataIndex: "student_id",
+    //     key: "student_id",
+    //     render: (text) => <div>{text}</div>,
+    //   },
       {
         title: t("Name"),
         dataIndex: "name",
@@ -78,6 +79,7 @@ export const Columns = (handleEdit, handleBan, handleDelete) => [
         key: "actions",
         render: (_, record) => (
           <Space>
+            <EditStudentModal student={record} onUpdate={onUpdate} />
             {/* <Button type="primary" icon={<EditOutlined />} onClick={() => handleEdit(record)}>
               {t("Change Password")}
             </Button> */}
