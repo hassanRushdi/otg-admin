@@ -10,6 +10,7 @@ import ContactUs from '@pages/contactus/ContactUs';
 import CoursePage from '@pages/course/CoursePage';
 import Home from '@pages/Dashboard/Home';
 import Newsletter from '@pages/newsletter/ContactUs';
+import ProgramsPage from '@pages/program/ProgramPage';
 import StudentsPage from '@pages/students/StudentsPage';
 
 
@@ -28,6 +29,7 @@ const Comp = {
     StudentsPage, 
     CompanyPage,
     CoursePage,
+    ProgramsPage,
 }
 
 export default Comp

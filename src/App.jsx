@@ -52,10 +52,10 @@ function App() {
             { index: true, element: <ProtectedRoutes><Comp.CoursePage /></ProtectedRoutes> }
           ]
         },
-        
+
         {
-          path: '/contact-us', children: [
-            { index: true, element: <ProtectedRoutes><Comp.ContactUs /></ProtectedRoutes> },  
+          path: '/program', children: [
+            { index: true, element: <ProtectedRoutes><Comp.ProgramsPage /></ProtectedRoutes> },  
            ]
         },
       

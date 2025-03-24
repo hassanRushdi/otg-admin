@@ -22,7 +22,8 @@ import {
   CalendarOutlined,
   ScheduleOutlined,
   BankOutlined,
-  UserOutlined
+  UserOutlined,
+  BookOutlined
 } from '@ant-design/icons';
 import { Drawer, Layout, Menu } from 'antd';
 import React, { useContext, useState, useEffect } from 'react';
@@ -66,6 +67,7 @@ const SideBar = ({ collapsed }) => {
     getItem((t('attendance')), '/attendance', <ScheduleOutlined />, null, '/attendance'),
     getItem((t('company')), '/company', <BankOutlined />, null, '/company'),
     getItem((t('course')), '/course', <ReadOutlined />, null, '/course'),
+    getItem((t('program')), '/program', <BookOutlined />, null, '/program'),
     getItem((t('students')), '/students', <UserOutlined />, null, '/students'),
 
   ];
@@ -113,7 +115,7 @@ const SideBar = ({ collapsed }) => {
         >
           <div className="demo-logo-vertical">
             <Link to={'/'}>
-              <img src={!collapsed ? img.logoTrain : img.logoSm} alt="" width={!collapsed ? 150 : 40} />
+              <img src={!collapsed ? img.logoTrain : img.logoSmall} alt="" width={!collapsed ? 150 : 40} />
             </Link>
           </div>
           <Menu
