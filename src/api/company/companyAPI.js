@@ -1,10 +1,14 @@
 import axios from "axios";
 
 const API_BASE_URL = "https://vigtas.co/lms";
+const TOKEN = localStorage.getItem('token');
 
 const api = axios.create({
   baseURL: API_BASE_URL,
-  headers: { "Content-Type": "application/json" },
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${TOKEN}`, 
+  },
 });
 
 export const getCompanies = async () => {
@@ -27,12 +31,12 @@ export const addCompany = async (companyData) => {
   }
 };
 
-export const updateCompany = async (companyId, companyData) => {
+export const updateCompany = async (companyData) => {
   try {
-    const response = await api.put(`/update-company/${companyId}`, companyData);
+    const response = await api.put(`/update-company`, companyData);
     return response.data;
   } catch (error) {
-    console.error("Error updating company:", error);
+    console.error("Error updating company:", error.response ? error.response.data : error);
     return null;
   }
 };
