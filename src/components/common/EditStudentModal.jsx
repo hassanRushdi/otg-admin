@@ -39,9 +39,9 @@ const EditStudentModal = ({ student, onUpdate }) => {
 
   return (
      <>
-      <Button type="primary" onClick={() => setVisible(true)}>
+      <div onClick={() => setVisible(true)}>
         Edit Student
-      </Button>
+      </div>
 
       <Modal
         title="Edit Student Details"

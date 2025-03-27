@@ -12,34 +12,40 @@ import { useState } from "react";
 import EditCompanyModal from "@components/common/EditCompanyModal";
 
 export const Columns = () => {
-  // const [modalType, setModalType] = useState(null);
-  // const [selectedCompany, setSelectedCompany] = useState(null);
+  const [modalType, setModalType] = useState(null);
+  const [selectedCompany, setSelectedCompany] = useState(null);
 
-  // const openModal = (type, company) => {
-  //   setSelectedCompany(company);
-  //   setModalType(type);
-  // };
+  const openModal = (type, company) => {
+    setSelectedCompany(company);
+    setModalType(type);
+  };
 
-  // const closeModal = () => {
-  //   setSelectedCompany(null);
-  //   setModalType(null);
-  // };
+  const closeModal = () => {
+    setSelectedCompany(null);
+    setModalType(null);
+  };
 
-  // const handleVerify = async (companyId) => {
-  //   const success = await verifyCompany(companyId);
-  //   if (success) {
-  //     message.success("Company verified successfully!");
-  //     fetchCompanies();
-  //   } else {
-  //     message.error("Failed to verify company.");
-  //   }
-  // };
+  const handleVerify = async (companyId) => {
+    const success = await verifyCompany(companyId);
+    if (success) {
+      message.success("Company verified successfully!");
+      fetchCompanies();
+    } else {
+      message.error("Failed to verify company.");
+    }
+  };
 
   return [
     //  { title: "Company ID", dataIndex: "company_id", key: "company_id" },
     { title: "Name",
       dataIndex: "company_name", 
       key: "company_name"
+    },
+    {
+      title: "Status",
+      dataIndex: "company_status",
+      key: "company_status",
+      render: (status) => (status ? "Verified" : "Unverified"),
     },
     {
       title: "Status",

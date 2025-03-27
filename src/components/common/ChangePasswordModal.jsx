@@ -39,13 +39,13 @@ const ChangePasswordModal = ({ student }) => {
 
   return (
     <>
-      <Button
-        type="primary"
+      <div
+      borderless
         icon={<LockOutlined />}
         onClick={() => setVisible(true)}
       >
         Change Password
-      </Button>
+      </div>
 
       <Modal
         title={`Change Password for ${student.name}`}

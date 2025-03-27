@@ -3,15 +3,16 @@ import MainLayout from '@layout/MainLayout';
 import AttendancePage from '@pages/attendance/AttendancePage';
 import Login from '@pages/auth/Login/Login';
 import Profile from '@pages/auth/Profile';
-import AddBlog from '@pages/blog/AddBlog';
-import BlogData from '@pages/blog/BlogData';
+import BannerPage from '@pages/banner/BannerPage';
 import CompanyPage from '@pages/company/CompanyPage';
-import ContactUs from '@pages/contactus/ContactUs';
 import CoursePage from '@pages/course/CoursePage';
 import Home from '@pages/Dashboard/Home';
-import Newsletter from '@pages/newsletter/ContactUs';
+import DataPage from '@pages/data/DataPage';
 import ProgramsPage from '@pages/program/ProgramPage';
+import QuestionsPage from '@pages/students-questions/QuestionsPage';
 import StudentsPage from '@pages/students/StudentsPage';
+
+
 
 
 const Comp = {
@@ -20,16 +21,15 @@ const Comp = {
     MainLayout,  
     Login, 
     Profile,   
-    ContactUs, 
-    Newsletter,
-    BlogData, 
-    AddBlog,
     Home,
-    AttendancePage,
     StudentsPage, 
     CompanyPage,
     CoursePage,
     ProgramsPage,
+    BannerPage,
+    DataPage,
+    AttendancePage,
+    QuestionsPage
 }
 
 export default Comp
