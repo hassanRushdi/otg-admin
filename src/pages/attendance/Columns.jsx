@@ -23,7 +23,7 @@ export const getAttendanceColumns = () => [
   },
 ];
 
-export const getStudentColumns = (handleStatusChange) => [
+export const getStudentColumns = (handleStatusChange, sessionId) => [
   {
     title: "Student Name",
     dataIndex: "student_name",
@@ -34,8 +34,8 @@ export const getStudentColumns = (handleStatusChange) => [
     dataIndex: "attendance_status",
     key: "attendance_status",
     render: (status) => {
-      let statusText = status === 1 ? "Present" : status === 2 ? "Absent" : "Pending";
-      let color = status === 1 ? "green" : status === 2 ? "red" : "orange";
+      let statusText = status === 2 ? "Present" : status === 0 ? "Absent" : "Pending";
+      let color = status === 2 ? "green" : status === 0 ? "red" : "orange";
       return <Tag color={color}>{statusText}</Tag>;
     },
   },
@@ -44,18 +44,16 @@ export const getStudentColumns = (handleStatusChange) => [
     key: "actions",
     render: (_, student) => (
       <Space>
-        <Button 
-          type="primary" 
-          disabled={student.attendance_status === 1} 
-          onClick={() => handleStatusChange(student.attendance_id, 1)}
+        <Button
+          type="primary"
+          onClick={() => handleStatusChange(sessionId, student.attendance_id, student.student_id, 2)}
         >
           Mark Present
         </Button>
-        <Button 
-          type="default" 
-          danger 
-          disabled={student.attendance_status === 2} 
-          onClick={() => handleStatusChange(student.attendance_id, 2)}
+        <Button
+          type="default"
+          danger
+          onClick={() => handleStatusChange(sessionId, student.attendance_id, student.student_id, 0)}
         >
           Mark Absent
         </Button>

@@ -1,17 +1,11 @@
 import { t } from "i18next";
-import { Button, Space, Popconfirm, Avatar, Menu, Dropdown } from "antd";
-import {
-  EditOutlined,
-  DeleteOutlined,
-  StopOutlined,
-  CheckOutlined,
-  UserAddOutlined,
-  MoreOutlined,
-} from "@ant-design/icons";
+import { Button, Space, Popconfirm, Menu, Dropdown, message } from "antd";
+import { EditOutlined, CheckOutlined, UserAddOutlined, MoreOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import EditCompanyModal from "@components/common/EditCompanyModal";
+import { verifyCompany } from "src/api/company/companyAPI";
 
-export const Columns = () => {
+export const Columns = (fetchCompanies) => {
   const [modalType, setModalType] = useState(null);
   const [selectedCompany, setSelectedCompany] = useState(null);
 
@@ -36,22 +30,16 @@ export const Columns = () => {
   };
 
   return [
-    //  { title: "Company ID", dataIndex: "company_id", key: "company_id" },
-    { title: "Name",
-      dataIndex: "company_name", 
-      key: "company_name"
-    },
+    { title: "Company Name", dataIndex: "company_name", key: "company_name" },
     {
       title: "Status",
       dataIndex: "company_status",
       key: "company_status",
-      render: (status) => (status ? "Verified" : "Unverified"),
     },
     {
-      title: "Status",
-      dataIndex: "company_status",
-      key: "company_status",
-      render: (status) => (status ? "Verified" : "Unverified"),
+      title: "Export Council Details",
+      dataIndex: "company_export_concil",
+      key: "company_export_concil",
     },
     {
       title: "Actions",
@@ -59,25 +47,13 @@ export const Columns = () => {
       render: (_, record) => {
         const menu = (
           <Menu>
-            <Menu.Item
-              key="verify"
-              icon={<CheckOutlined />}
-              onClick={() => handleVerify(record.company_id)}
-            >
+            <Menu.Item key="verify" icon={<CheckOutlined />} onClick={() => handleVerify(record.company_id)}>
               Verify Company
             </Menu.Item>
-            <Menu.Item
-              key="edit"
-              icon={<EditOutlined />}
-              onClick={() => openModal("edit", record)}
-            >
+            <Menu.Item key="edit" icon={<EditOutlined />} onClick={() => openModal("edit", record)}>
               Edit Company
             </Menu.Item>
-            <Menu.Item
-              key="assign"
-              icon={<UserAddOutlined />}
-              onClick={() => openModal("assign", record)}
-            >
+            <Menu.Item key="assign" icon={<UserAddOutlined />} onClick={() => openModal("assign", record)}>
               Assign Student
             </Menu.Item>
           </Menu>
@@ -90,19 +66,7 @@ export const Columns = () => {
             </Dropdown>
 
             {modalType === "edit" && selectedCompany && (
-              <EditCompanyModal
-                company={selectedCompany}
-                onClose={closeModal}
-                onUpdate={fetchCompanies}
-              />
-            )}
-
-            {modalType === "assign" && selectedCompany && (
-              <AssignStudentModal
-                company={selectedCompany}
-                onClose={closeModal}
-                onUpdate={fetchCompanies}
-              />
+              <EditCompanyModal company={selectedCompany} onClose={closeModal} onUpdate={fetchCompanies} />
             )}
           </Space>
         );

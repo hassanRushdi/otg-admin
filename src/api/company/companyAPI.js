@@ -13,7 +13,8 @@ const api = axios.create({
 
 export const getCompanies = async () => {
   try {
-    const response = await api.get("/company");
+    const response = await api.get("/get-all-companies"); 
+    console.log("API Response:", response.data); 
     return response.data || [];
   } catch (error) {
     console.error("Error fetching companies:", error);

@@ -1,7 +1,7 @@
 import { message, Table, Button, Modal, Form, Input, Select } from "antd";
 import React, { useEffect, useState } from "react";
 import { Columns } from "./Columns";
-import { addCompany, getCompanies } from "src/api/company/companyAPI";
+import { getCompanies, addCompany } from "src/api/company/companyAPI";
 
 const CompanyPage = () => {
   const [companies, setCompanies] = useState([]);
@@ -17,19 +17,21 @@ const CompanyPage = () => {
     setLoading(true);
     try {
       const data = await getCompanies();
-
-      if (data) {
+      console.log("Fetched Companies:", data); // Debugging
+  
+      if (Array.isArray(data)) {
         setCompanies(
           data.map((company) => ({
-            key: company.id,
-            company_id: company.id,
-            company_name: company.name,
-            company_sector: company.sector || "N/A",
-            company_status: company.status ? "Verified" : "Unverified",
+            key: company.company_id,
+            company_id: company.company_id,
+            company_name: company.company_name,
+            company_sector: company.company_sector || "N/A",
+            company_status: company.company_status ? "Verified" : "Unverified",
+            export_council: company.company_has_export_council ? "Yes" : "N/A", // Fix applied here
           }))
         );
       } else {
-        message.error("Failed to load companies.");
+        message.error("Invalid data format received.");
         setCompanies([]);
       }
     } catch (error) {
@@ -38,6 +40,8 @@ const CompanyPage = () => {
     }
     setLoading(false);
   };
+  
+  
 
   const showAddModal = () => {
     setIsModalVisible(true);
@@ -45,7 +49,7 @@ const CompanyPage = () => {
   };
 
   const handleFormSubmit = async (values) => {
-    try {  
+    try {
       await addCompany(values);
       message.success("Company added successfully!");
       setIsModalVisible(false);
@@ -57,30 +61,25 @@ const CompanyPage = () => {
 
   return (
     <div>
-      <Button
-        type="primary"
-        onClick={showAddModal}
-        style={{ marginBottom: 16 }}
-      >
+      <Button type="primary" onClick={showAddModal} style={{ marginBottom: 16 }}>
         Add Company
       </Button>
 
       <Table
-        columns={Columns()}
+        columns={Columns(fetchCompanies)} 
         dataSource={companies}
         rowKey="company_id"
         pagination={{ pageSize: 5 }}
         loading={loading}
       />
 
-<Modal
-        title={"Add Company"}
+      <Modal
+        title="Add Company"
         open={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
         onOk={() => form.submit()}
       >
         <Form form={form} layout="vertical" onFinish={handleFormSubmit}>
-          {/* Company Name */}
           <Form.Item
             name="company_name"
             label="Company Name"
@@ -89,49 +88,43 @@ const CompanyPage = () => {
             <Input placeholder="Enter company name" />
           </Form.Item>
 
-          {/* Company Sector */}
           <Form.Item
             name="company_sector"
             label="Sector"
-            rules={[{ required: true, message: "Please select a sector!" }]}
+            rules={[{ required: true, message: "Please enter a sector!" }]}
           >
             <Input placeholder="Enter company sector" />
           </Form.Item>
 
-          {/* Company Status */}
           <Form.Item
             name="company_status"
             label="Status"
             rules={[{ required: true, message: "Please select a status!" }]}
           >
             <Select>
-              <Option value={1}>Active</Option>
-              <Option value={0}>Inactive</Option>
+              <Select.Option value={1}>Active</Select.Option>
+              <Select.Option value={0}>Inactive</Select.Option>
             </Select>
           </Form.Item>
 
-          {/* Has Export Conciliation */}
           <Form.Item
             name="has_export_concil"
             label="Has Export Conciliation"
             rules={[{ required: true, message: "Please select an option!" }]}
           >
             <Select>
-              <Option value={true}>Yes</Option>
-              <Option value={false}>No</Option>
+              <Select.Option value={true}>Yes</Select.Option>
+              <Select.Option value={false}>No</Select.Option>
             </Select>
           </Form.Item>
 
-          {/* Company Export Conciliation Details */}
           <Form.Item
             name="company_export_concil"
             label="Export Conciliation Details"
-            rules={[{ required: true, message: "Please provide export details!" }]}
           >
             <Input.TextArea placeholder="Enter export conciliation details" />
           </Form.Item>
 
-          {/* User ID */}
           <Form.Item
             name="user_id"
             label="User ID"
