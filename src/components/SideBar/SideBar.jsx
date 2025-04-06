@@ -23,7 +23,9 @@ import {
   ScheduleOutlined,
   BankOutlined,
   UserOutlined,
-  BookOutlined
+  BookOutlined,
+  IdcardOutlined,
+  DatabaseOutlined
 } from '@ant-design/icons';
 import { Drawer, Layout, Menu } from 'antd';
 import React, { useContext, useState, useEffect } from 'react';
@@ -64,11 +66,15 @@ const SideBar = ({ collapsed }) => {
     // getItem(t('newsletter'), '/newsletter', <MailOutlined  />, null, '/newsletter'),
     
     // getItem(t('newsletter'), '/newsletter', <MailOutlined  />, null, '/newsletter'),   "Translation"
-    getItem((t('attendance')), '/attendance', <ScheduleOutlined />, null, '/attendance'),
+    // getItem((t('attendance')), '/attendance', <ScheduleOutlined />, null, '/attendance'),
     getItem((t('company')), '/company', <BankOutlined />, null, '/company'),
     getItem((t('course')), '/course', <ReadOutlined />, null, '/course'),
     getItem((t('program')), '/program', <BookOutlined />, null, '/program'),
     getItem((t('students')), '/students', <UserOutlined />, null, '/students'),
+    getItem((t('attendance')), '/attendance', <IdcardOutlined />, null, '/attendance'),
+    getItem((t('banner')), '/banner', <PictureOutlined />, null, '/banner'),
+    getItem((t('data')), '/data', <DatabaseOutlined />, null, '/data'),
+    getItem((t('students questions')), '/students-questions', <DatabaseOutlined />, null, '/students-questions'),
 
   ];
 

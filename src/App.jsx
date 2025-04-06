@@ -21,17 +21,21 @@ function App() {
         { path: '/newsletter', element: <ProtectedRoutes><Comp.Newsletter /></ProtectedRoutes> },
  
  
-        {
-          path: '/blogs', children: [
-            { index: true, element: <ProtectedRoutes><Comp.BlogData /></ProtectedRoutes> },  
-            { path: 'add', element: <ProtectedRoutes><Comp.AddBlog /></ProtectedRoutes> }, 
-            { path: 'edit/:id', element: <ProtectedRoutes><Comp.EditBlog /></ProtectedRoutes> }, 
-          ]
-        },
+       
 
         {
           path: '/attendance', children: [
             { index: true, element: <ProtectedRoutes><Comp.AttendancePage /></ProtectedRoutes> }
+          ]
+        },
+        {
+          path: '/banner', children: [
+            { index: true, element: <ProtectedRoutes><Comp.BannerPage /></ProtectedRoutes> }
+          ]
+        },
+        {
+          path: '/data', children: [
+            { index: true, element: <ProtectedRoutes><Comp.DataPage /></ProtectedRoutes> }
           ]
         },
 
@@ -56,6 +60,12 @@ function App() {
         {
           path: '/program', children: [
             { index: true, element: <ProtectedRoutes><Comp.ProgramsPage /></ProtectedRoutes> },  
+           ]
+        },
+
+        {
+          path: '/students-questions', children: [
+            { index: true, element: <ProtectedRoutes><Comp.QuestionsPage /></ProtectedRoutes> },  
            ]
         },
       

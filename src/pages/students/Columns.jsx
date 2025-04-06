@@ -1,6 +1,6 @@
 import { t } from "i18next";
-import { Button, Space, Popconfirm, Avatar } from "antd";
-import { EditOutlined, DeleteOutlined, StopOutlined, CheckOutlined } from "@ant-design/icons";
+import { Button, Space, Popconfirm, Avatar, Tag, Menu, Dropdown } from "antd";
+import { EditOutlined, DeleteOutlined, StopOutlined, CheckOutlined, DownOutlined, MoreOutlined } from "@ant-design/icons";
 import ChangePasswordModal from "@components/common/ChangePasswordModal";
 import EditStudentModal from "@components/common/EditStudentModal";
 
@@ -67,46 +67,42 @@ export const Columns = (onUpdate, handleBan, handleDelete) => [
         title: t("Status"),
         dataIndex: "banned",
         key: "banned",
-        render: (banned) => (
-          <span style={{ color: banned ? "red" : "green", fontWeight: "bold" }}>
-            {banned ? t("Banned") : t("Active")}
-          </span>
+        render: (banned, record) => (
+          <Popconfirm
+            title={banned ? t("Unban this student?") : t("Ban this student?")}
+            onConfirm={() => handleBan(record.student_id, !banned)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Tag color={banned ? "red" : "green"} style={{ cursor: "pointer" }}>
+              {banned ? t("Banned") : t("Active")}
+            </Tag>
+          </Popconfirm>
         ),
       },
       
       {
         title: t("Actions"),
         key: "actions",
-        render: (_, record) => (
-          <Space>
-            <EditStudentModal student={record} onUpdate={onUpdate} />
-            {/* <Button type="primary" icon={<EditOutlined />} onClick={() => handleEdit(record)}>
-              {t("Change Password")}
-            </Button> */}
-            <ChangePasswordModal student={record} />
+        render: (_, record) => {
+          const menu = (
+            <Menu>
+              <Menu.Item key="edit">
+                <EditStudentModal student={record} onUpdate={onUpdate} />
+              </Menu.Item>
+              <Menu.Item key="change-password">
+                <ChangePasswordModal student={record} />
+              </Menu.Item>
+            </Menu>
+          );
     
-            <Popconfirm
-              title={record.banned ? t("Unban this student?") : t("Ban this student?")}
-              onConfirm={() => handleBan(record.student_id, !record.banned)}
-              okText="Yes"
-              cancelText="No"
-            >
-              <Button icon={record.banned ? <CheckOutlined /> : <StopOutlined />} danger>
-                {record.banned ? t("Unban") : t("Ban")}
+          return (
+            <Dropdown overlay={menu} trigger={["click"]}>
+              <Button>
+                <MoreOutlined />
               </Button>
-            </Popconfirm>
-    
-            {/* <Popconfirm
-              title={t("Are you sure you want to delete this student?")}
-              onConfirm={() => handleDelete(record.student_id)}
-              okText="Yes"
-              cancelText="No"
-            >
-              <Button icon={<DeleteOutlined />} type="primary" danger>
-                {t("Delete")}
-              </Button>
-            </Popconfirm> */}
-          </Space>
-        ),
+            </Dropdown>
+          );
+        },
       },
 ]
