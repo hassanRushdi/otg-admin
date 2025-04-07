@@ -1,20 +1,32 @@
-import axios from 'axios'
+import axios from "axios";
 
-const API_BASE_URL = 'https://vigtas.co/lms';
+const BASE_URL = "https://vigtas.co/lms";
 
-const api = axios.create({
-    baseURL: API_BASE_URL,
-    headers: {
-        "Content-Type" : "application/json"
-    }
-})
+export const fetchAllCourses = async () => {
+  const response = await axios.get(`${BASE_URL}/get-all-courses`);
+  return response.data;
+};
 
-export const getCourses = async () => {
-    try {
-        const response = await api.get("/registered-students");
-        return response.data?.data?.students || []; 
-      } catch (error) {
-        console.error("Error fetching students:", error);
-        return [];
-      }
-}
+export const addCourse = async (courseData) => {
+  try {
+    const response = await axios.post('https://vigtas.co/lms/add-course-details', courseData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response ? error.response.data : 'Error adding course');
+  }
+};
+
+
+export const addChapter = async (chapterData) => {
+  try {
+    const response = await axios.post(`https://vigtas.co/lms/add-chapter-details`, chapterData);
+    return response.data;
+  } catch (error) {
+    console.error('Error adding chapter:', error);
+    throw error;
+  }
+};
