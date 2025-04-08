@@ -8,17 +8,20 @@ import {
   Typography,
   Divider,
   List,
+  Col,
+  Row,
 } from "antd";
 import {
   DollarCircleOutlined,
   ScheduleOutlined,
   BranchesOutlined,
   CalendarOutlined,
-  FilePdfOutlined, VideoCameraOutlined
+  FilePdfOutlined,
+  VideoCameraOutlined,
 } from "@ant-design/icons";
 import axios from "axios";
 import AddChapterForm from "./chapters/AddChapterModal";
-
+import AddModuleForm from "./modules/AddModuleForm";
 
 const { Title, Text } = Typography;
 const { Panel } = Collapse;
@@ -27,7 +30,8 @@ const CourseDetailsModal = ({ open, onClose, course }) => {
   const [courseDetails, setCourseDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isAddChapterModalOpen, setAddChapterModalOpen] = useState(false);
-  
+  const [isAddModuleModalOpen, setAddModuleModalOpen] = useState(false);
+  const [selectedChapterId, setSelectedChapterId] = useState(null);
 
   const fetchCourseDetails = async () => {
     setLoading(true);
@@ -138,10 +142,26 @@ const CourseDetailsModal = ({ open, onClose, course }) => {
 
           <Collapse defaultActiveKey={["1"]} accordion>
             {courseDetails?.chapters?.map((chapter, index) => (
-              <Panel header={<Text strong>{chapter.titleEn}</Text>} key={index}>
-                <Text strong style={{ fontSize: "18px" }}>
-                  Modules
-                </Text>
+              <Panel key={index} header={<Text strong>{chapter.titleEn}</Text>}>
+                <Row justify="space-between" align="middle">
+                  <Col>
+                    <Text strong style={{ fontSize: "18px" }}>
+                      Modules
+                    </Text>
+                  </Col>
+                  <Col>
+                    <Button
+                      type="primary"
+                      onClick={() => {
+                        setSelectedChapterId(chapter.chapterId);
+                        setAddModuleModalOpen(true);
+                      }}
+                    >
+                      Add Module
+                    </Button>
+                  </Col>
+                </Row>
+
                 <Collapse
                   defaultActiveKey={["1"]}
                   accordion
@@ -185,29 +205,41 @@ const CourseDetailsModal = ({ open, onClose, course }) => {
                         ))}
                       </Collapse> */}
                       <List
-                    size="small"
-                    header={<b>Content</b>}
-                    dataSource={module.contents}
-                    renderItem={(item) => (
-                      <List.Item>
-                        {item.materialType === 0 ? (
-                          <>
-                            <FilePdfOutlined style={{ color: '#d32029', marginRight: 8 }} />
-                            <a href={item.contentData} target="_blank" rel="noopener noreferrer">
-                              View PDF
-                            </a>
-                          </>
-                        ) : (
-                          <>
-                            <VideoCameraOutlined style={{ color: '#1890ff', marginRight: 8 }} />
-                            <a href={item.contentData} target="_blank" rel="noopener noreferrer">
-                              Watch Video
-                            </a>
-                          </>
+                        size="small"
+                        header={<b>Content</b>}
+                        dataSource={module.contents}
+                        renderItem={(item) => (
+                          <List.Item>
+                            {item.materialType === 0 ? (
+                              <>
+                                <FilePdfOutlined
+                                  style={{ color: "#d32029", marginRight: 8 }}
+                                />
+                                <a
+                                  href={item.contentData}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  View PDF
+                                </a>
+                              </>
+                            ) : (
+                              <>
+                                <VideoCameraOutlined
+                                  style={{ color: "#1890ff", marginRight: 8 }}
+                                />
+                                <a
+                                  href={item.contentData}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  Watch Video
+                                </a>
+                              </>
+                            )}
+                          </List.Item>
                         )}
-                      </List.Item>
-                    )}
-                  />
+                      />
                     </Panel>
                   ))}
                 </Collapse>
@@ -228,6 +260,16 @@ const CourseDetailsModal = ({ open, onClose, course }) => {
             onClose={() => setAddChapterModalOpen(false)}
             courseId={course.course_id}
             onChapterAdded={() => fetchCourseDetails()}
+          />
+
+          <AddModuleForm
+            visible={isAddModuleModalOpen}
+            onClose={() => {
+              setAddModuleModalOpen(false);
+              setSelectedChapterId(null);
+            }}
+            chapterId={selectedChapterId}
+            onModuleAdded={fetchCourseDetails}
           />
 
           <Button
