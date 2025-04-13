@@ -68,7 +68,19 @@ function App() {
             { index: true, element: <ProtectedRoutes><Comp.QuestionsPage /></ProtectedRoutes> },  
            ]
         },
-      
+        {
+          path: '/questions-bank', children: [
+            { index: true, element: <ProtectedRoutes><Comp.QuestionsBankPage /></ProtectedRoutes> },  
+           ]
+        },
+
+        {
+          path: '/exam', children: [
+            { index: true, element: <ProtectedRoutes><Comp.ExamPage /></ProtectedRoutes> },  
+           ]
+        },
+        
+       
         {
           path: '*', element: <h1>Error</h1>
         }

@@ -4,6 +4,7 @@ import { EditOutlined, CheckOutlined, UserAddOutlined, MoreOutlined } from "@ant
 import { useState } from "react";
 import EditCompanyModal from "@components/common/EditCompanyModal";
 import { verifyCompany } from "src/api/company/companyAPI";
+import AssignStudentModal from "@components/common/AssignStudentModal";
 
 export const Columns = (fetchCompanies) => {
   const [modalType, setModalType] = useState(null);
@@ -67,6 +68,14 @@ export const Columns = (fetchCompanies) => {
 
             {modalType === "edit" && selectedCompany && (
               <EditCompanyModal company={selectedCompany} onClose={closeModal} onUpdate={fetchCompanies} />
+            )}
+            
+            {modalType === "assign" && selectedCompany && (
+              <AssignStudentModal 
+                company={selectedCompany} 
+                onClose={closeModal} 
+                onSuccess={fetchCompanies}
+              />
             )}
           </Space>
         );

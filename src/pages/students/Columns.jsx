@@ -7,11 +7,12 @@ import EditStudentModal from "@components/common/EditStudentModal";
 
 export const Columns = (onUpdate, handleBan, handleDelete) => [
   {
-    title: t("Profile Image"),
+    title: t("Photo"),
     dataIndex: "student_image",
     key: "student_image",
     render: (src, record) => {
-      const isValidImage = src;
+      // Check if the image is valid (not "null" string)
+      const isValidImage = src && !src.includes('/null');
       return (
         <Avatar
           src={isValidImage ? src : "https://via.placeholder.com/50"}

@@ -16,7 +16,7 @@ export const getStudents = async () => {
     return response.data?.data?.students || []; 
   } catch (error) {
     console.error("Error fetching students:", error);
-    return [];
+    return [];  
   }
 };
 

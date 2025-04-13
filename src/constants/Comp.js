@@ -8,7 +8,9 @@ import CompanyPage from '@pages/company/CompanyPage';
 import CoursePage from '@pages/course/CoursePage';
 import Home from '@pages/Dashboard/Home';
 import DataPage from '@pages/data/DataPage';
+import ExamPage from '@pages/exam/ExamPage';
 import ProgramsPage from '@pages/program/ProgramPage';
+import QuestionsBankPage from '@pages/question/QuestionsBankPage';
 import QuestionsPage from '@pages/students-questions/QuestionsPage';
 import StudentsPage from '@pages/students/StudentsPage';
 
@@ -29,7 +31,9 @@ const Comp = {
     BannerPage,
     DataPage,
     AttendancePage,
-    QuestionsPage
+    QuestionsPage,
+    QuestionsBankPage,
+    ExamPage,
 }
 
 export default Comp
