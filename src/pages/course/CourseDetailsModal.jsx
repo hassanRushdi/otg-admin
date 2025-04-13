@@ -12,7 +12,6 @@ import {
   Row,
 } from "antd";
 import {
-  DollarCircleOutlined,
   ScheduleOutlined,
   BranchesOutlined,
   CalendarOutlined,
@@ -97,7 +96,7 @@ const CourseDetailsModal = ({ open, onClose, course }) => {
             </Descriptions.Item>
             <Descriptions.Item label="Price">
               <Text strong>
-                <DollarCircleOutlined /> ${course.final_price}
+                 EGP{course.final_price}
                 {course.has_discount && (
                   <Text
                     type="secondary"
@@ -172,38 +171,6 @@ const CourseDetailsModal = ({ open, onClose, course }) => {
                       header={<Text strong>{module.titleEn}</Text>}
                       key={module.moduleId}
                     >
-                      {/* <Text strong style={{ fontSize: "18px" }}>
-                        Sessions
-                      </Text>
-                      <Collapse
-                        defaultActiveKey={["1"]}
-                        accordion
-                        style={{ marginTop: 8 }}
-                      >
-                        {module.sessions.map((session) => (
-                          <Panel
-                            header={<Text strong>{session.titleEn}</Text>}
-                            key={session.sessionId}
-                          >
-                            <Text>Start Time: {session.startTime}</Text>
-                            <br />
-                            <Text>End Time: {session.endTime}</Text>
-                            <br />
-                            <Text>Location: {session.addressEn}</Text>
-                            <br />
-                            <Text>
-                              Link:{" "}
-                              <a
-                                href={session.microsoftTeamsLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                Join
-                              </a>
-                            </Text>
-                          </Panel>
-                        ))}
-                      </Collapse> */}
                       <List
                         size="small"
                         header={<b>Content</b>}

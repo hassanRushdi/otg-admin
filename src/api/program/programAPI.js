@@ -11,7 +11,7 @@ const api = axios.create({
 
 export const getPrograms = async () => {
   try {
-    const response = await api.get("/program");
+    const response = await api.get("/admin-show-programs");
     return response.data || [];
   } catch (error) {
     console.error("Error fetching programs:", error);
