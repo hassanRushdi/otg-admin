@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Button, Input, message, Upload } from "antd";
 import { editStudentData } from "src/api/students/studentsAPI";
-import { uploadImage } from "src/api/uploader/uploadImage";
+// import { uploadImage } from "src/api/uploader/uploadImage";
 import { UploadOutlined } from "@ant-design/icons";
 import axios from "axios";
 ;
@@ -50,7 +50,7 @@ const EditStudentModal = ({ student, onUpdate }) => {
       console.log('Uploading file:', file.name, file.size);
   
       const response = await axios.post(
-        'https://vigtas.live/uploader/uploads', 
+        'https://vigtas.co/uploader-1.0-SNAPSHOT/uploads', 
         formData,
         {
           headers: {
@@ -65,6 +65,8 @@ const EditStudentModal = ({ student, onUpdate }) => {
       
       
       const fullUrl = `https://vigtas.co/uploader-1.0-SNAPSHOT/uploads/${filename}`;
+
+      console.log(filename.fileName)
       
       console.log('Generated URL:', fullUrl);
       setImageUrl(fullUrl);
