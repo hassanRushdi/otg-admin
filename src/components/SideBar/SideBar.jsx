@@ -75,6 +75,8 @@ const SideBar = ({ collapsed }) => {
     getItem((t('banner')), '/banner', <PictureOutlined />, null, '/banner'),
     getItem((t('data')), '/data', <DatabaseOutlined />, null, '/data'),
     getItem((t('students questions')), '/students-questions', <DatabaseOutlined />, null, '/students-questions'),
+    getItem((t('Questions Bank')), '/questions-bank', <DatabaseOutlined />, null, '/questions-bank'),
+    getItem((t('Exam')), '/exam', <DatabaseOutlined />, null, '/exam'),
 
   ];
 

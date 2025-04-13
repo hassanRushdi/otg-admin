@@ -65,10 +65,16 @@ export const verifyCompany = async (companyId) => {
 
 export const addStudentToCompany = async (studentId, companyId) => {
   try {
-    const response = await api.put(`/add-student-to-company/${studentId}`, { company_id: companyId });
+    const formData = new FormData();
+    formData.append("company_id", companyId);
+
+    const response = await api.put(`/add-student-to-company/${studentId}`, formData, {
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    });
+
     return response.data;
   } catch (error) {
-    console.error("Error assigning student to company:", error);
+    console.error("Error assigning student to company:", error.response?.data || error.message);
     return null;
   }
 };
