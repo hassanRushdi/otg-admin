@@ -17,19 +17,29 @@ const CompanyPage = () => {
     setLoading(true);
     try {
       const data = await getCompanies();
-      console.log("Fetched Companies:", data); // Debugging
-  
-      if (Array.isArray(data)) {
-        setCompanies(
-          data.map((company) => ({
-            key: company.company_id,
-            company_id: company.company_id,
-            company_name: company.company_name,
-            company_sector: company.company_sector || "N/A",
-            company_status: company.company_status ? "Verified" : "Unverified",
-            export_council: company.company_has_export_council ? "Yes" : "N/A", // Fix applied here
-          }))
-        );
+      
+      if (data?.data?.company) {
+        setCompanies([{
+          key: data.data.company.company_id,
+          company_id: data.data.company.company_id,
+          company_name: data.data.company.company_name,
+          company_sector: data.data.company.company_sector || "N/A",
+          company_status: data.data.company.company_status, // Keep original number
+          company_status_display: data.data.company.company_status ? "Verified" : "Unverified", // For display
+          company_export_council: data.data.company.company_export_council || "N/A",
+          has_export_council: data.data.company.has_export_council
+        }]);
+      } else if (Array.isArray(data)) {
+        setCompanies(data.map((company) => ({
+          key: company.company_id,
+          company_id: company.company_id,
+          company_name: company.company_name,
+          company_sector: company.company_sector || "N/A",
+          company_status: company.company_status, // Keep original number
+          company_status_display: company.company_status ? "Verified" : "Unverified", // For display
+          company_export_council: company.company_export_council || "N/A",
+          has_export_council: company.has_export_council
+        })));
       } else {
         message.error("Invalid data format received.");
         setCompanies([]);
@@ -40,7 +50,6 @@ const CompanyPage = () => {
     }
     setLoading(false);
   };
-  
   
 
   const showAddModal = () => {

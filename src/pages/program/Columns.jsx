@@ -4,18 +4,18 @@ import { t } from "i18next";
 
 export const Columns = (handleEdit) => [
  
-    {
-        title: t('program title'),
-        dataIndex: 'course_program_title',
-        key: 'course_program_title',
-        render: (text) => <div>{text}</div>, 
-    },
-    {
-        title: t('program description'),
-        dataIndex: 'course_program_description',
-        key: 'course_program_description',
-        render: (text) => <div>{text}</div>, 
-    },
+  {
+    title: t('program title'),
+    dataIndex: 'course_program_title',
+    key: 'course_program_title',
+    render: (text) => <div>{text}</div>,
+  },
+  {
+    title: "Program Description",
+    dataIndex: 'course_program_description',
+    key: 'course_program_description',
+    render: (text) => <div>{text}</div>,
+  },
     {
         title: t('program status'),
         dataIndex: 'course_program_status',

@@ -29,7 +29,7 @@ const EditStudentModal = ({ student, onUpdate }) => {
         
       });
 
-      setImageUrl(student.student_image || null);
+      setImageUrl(student.image || null);
     }
   }, [student]);
 
@@ -50,21 +50,19 @@ const EditStudentModal = ({ student, onUpdate }) => {
       console.log('Uploading file:', file.name, file.size);
   
       const response = await axios.post(
-        'https://vigtas.co/uploader-1.0-SNAPSHOT/uploads', 
+        'https://vigtas.co/uploader-1.0-SNAPSHOT/uploads',
         formData,
         {
           headers: {
             'Content-Type': 'multipart/form-data',
-          },
-          transformResponse: [data => data], 
+          }
         }
-      );
-  
-      const filename = response.data.trim(); // Remove any newlines
+      ); 
+      const filename = response.data.fileName; 
       if (!filename) throw new Error('Empty filename returned');
       
       
-      const fullUrl = `https://vigtas.co/uploader-1.0-SNAPSHOT/uploads/${filename}`;
+      const fullUrl = response.data.fileName;
 
       console.log(filename.fileName)
       
@@ -95,7 +93,7 @@ const EditStudentModal = ({ student, onUpdate }) => {
         title: formData.title,
         phone_number: formData.phone_number,
         email: formData.email,
-        student_image: imageUrl,
+        image: imageUrl,
       };
       console.log('Submitting:', updatedData);
 

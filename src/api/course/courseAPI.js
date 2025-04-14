@@ -30,3 +30,16 @@ export const addChapter = async (chapterData) => {
     throw error;
   }
 };
+
+export const addStudentToCourse = async (enrollmentData) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/add-enrollment`, enrollmentData, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response ? error.response.data : 'Error adding student to course');
+  }
+};
