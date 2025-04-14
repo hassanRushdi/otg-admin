@@ -39,9 +39,9 @@ export const Columns = (fetchCompanies) => {
     },
     {
       title: "Export Council Details",
-      dataIndex: "company_export_concil",
-      key: "company_export_concil",
-    },
+      dataIndex: "company_export_council", 
+      key: "company_export_council",
+    },   
     {
       title: "Actions",
       key: "actions",

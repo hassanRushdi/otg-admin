@@ -45,10 +45,24 @@ export const addCompany = async (companyData) => {
 
 export const updateCompany = async (companyData) => {
   try {
-    const response = await api.put(`/update-company`, companyData);
+    const formData = new FormData();
+    formData.append("company_id", companyData.company_id.toString());
+    formData.append("user_id", companyData.user_id?.toString() || "1"); // Fallback to 1 if not provided
+    formData.append("company_name", companyData.company_name);
+    formData.append("company_status", companyData.company_status?.toString() || "1"); // Default to 1
+    formData.append("company_sector", companyData.company_sector || "");
+    formData.append("has_export_council", companyData.has_export_council ? "true" : "false");
+    formData.append("export_council", companyData.export_council || "");
+
+    const response = await api.put("/update-company", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data", // Important for form data
+      },
+    });
+
     return response.data;
   } catch (error) {
-    console.error("Error updating company:", error.response ? error.response.data : error);
+    console.error("Error updating company:", error.response?.data || error.message);
     return null;
   }
 };
