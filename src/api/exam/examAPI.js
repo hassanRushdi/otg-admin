@@ -17,9 +17,14 @@ export const addExam = async (examData) => {
       headers: {
         'Content-Type': 'application/json',
       },
+      transformRequest: [(data) => {
+        console.log('Sending:', data); 
+        return JSON.stringify(data);
+      }]
     });
     return response.data;
   } catch (error) {
-    throw new Error(error.response ? error.response.data : 'Error adding exam');
+    console.error('API Error:', error.response?.data);
+    throw new Error(error.response?.data?.message || 'Exam creation failed');
   }
 };

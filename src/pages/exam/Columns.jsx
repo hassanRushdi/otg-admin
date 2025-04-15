@@ -62,7 +62,6 @@ export const examColumns = [
         overlay={
           <Menu>
             <Menu.Item key="edit">Edit</Menu.Item>
-            <Menu.Item key="delete">Delete</Menu.Item>
           </Menu>
         }
         trigger={["click"]}
