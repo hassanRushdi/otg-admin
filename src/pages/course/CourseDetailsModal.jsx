@@ -92,7 +92,7 @@ const CourseDetailsModal = ({ open, onClose, course }) => {
               <Text strong>{course.title_en}</Text>
             </Descriptions.Item>
             <Descriptions.Item label="Description">
-              {course.description_en}
+            <div dangerouslySetInnerHTML={{ __html: course.description_en }} />
             </Descriptions.Item>
             <Descriptions.Item label="Price">
               <Text strong>

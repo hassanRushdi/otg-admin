@@ -15,12 +15,26 @@ export const getBanners = async () => {
 
   export const updateBanner = async (bannerId, data) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/update-banner/${bannerId}`, new URLSearchParams(data), {
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      const formData = new URLSearchParams();
+  
+      Object.entries(data).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          formData.append(key, String(value));
+        }
       });
+  
+      const response = await axios.post(
+        `${API_LIVE_URL}/update-banner/${bannerId}`,
+        formData,
+        {
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        }
+      );
+  
       return response.data;
     } catch (error) {
       console.error("Error updating banner:", error);
       throw error;
     }
   };
+  

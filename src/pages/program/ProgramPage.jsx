@@ -1,5 +1,15 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
-import { Table, Button, Modal, Form, Input, Upload, message, Select } from "antd";
+import {
+  Table,
+  Button,
+  Modal,
+  Form,
+  Input,
+  Upload,
+  message,
+  Select,
+} from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { Columns } from "./Columns";
 import {
@@ -14,6 +24,8 @@ const ProgramsPage = ({ t }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [imageUrl, setImageUrl] = useState(null);
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -47,22 +59,73 @@ const ProgramsPage = ({ t }) => {
     setIsEditMode(true);
     setSelectedProgram(program);
     setIsModalVisible(true);
-    form.setFieldsValue(program);
+    const imageValue = program.image
+      ? program.image.replace(
+          "https://vigtas.co/uploader-1.0-SNAPSHOT/uploads/",
+          ""
+        )
+      : null;
+      form.setFieldsValue({
+        ...program,
+        image: imageValue
+      });
+      setImageUrl(imageValue);
+  };
+
+  const handleImageUpload = async (file) => {
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await axios.post(
+        "https://vigtas.co/uploader-1.0-SNAPSHOT/uploads",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      // Only store the filename, not the full URL
+      const filename = response.data.fileName;
+      setImageUrl(filename); // Store just the filename
+      return filename; // Return just the filename
+    } catch (error) {
+      console.error("Upload failed:", error.response || error);
+      message.error(`Upload failed: ${error.message}`);
+      throw error;
+    } finally {
+      setUploading(false);
+    }
   };
 
   const handleFormSubmit = async (values) => {
-    if (isEditMode) {
-      await updateProgram({
+    try {
+      const payload = {
         ...values,
-        course_program_id: selectedProgram.course_program_id,
-      });
-      message.success("Program updated successfully!");
-    } else {
-      await addProgram(values);
-      message.success("Program added successfully!");
+        image: imageUrl,
+      };
+
+      if (isEditMode) {
+        await updateProgram({
+          ...payload,
+          course_program_id: selectedProgram.course_program_id,
+        });
+        message.success("Program updated successfully!");
+      } else {
+        await addProgram(payload);
+        message.success("Program added successfully!");
+      }
+
+      setIsModalVisible(false);
+      fetchPrograms();
+      form.resetFields();
+      setImageUrl(null);
+    } catch (error) {
+      message.error("Operation failed.");
     }
-    setIsModalVisible(false);
-    fetchPrograms();
   };
 
   return (
@@ -114,9 +177,29 @@ const ProgramsPage = ({ t }) => {
             </Select>
           </Form.Item>
           <Form.Item name="image" label="Upload Image">
-            <Upload beforeUpload={() => false}>
-              <Button icon={<UploadOutlined />}>Upload</Button>
+            <Upload
+              accept="image/*"
+              showUploadList={false}
+              customRequest={async ({ file, onSuccess, onError }) => {
+                try {
+                  const filename = await handleImageUpload(file);
+                  onSuccess(filename, file);
+                } catch (err) {
+                  onError(err);
+                }
+              }}
+            >
+              <Button icon={<UploadOutlined />} loading={uploading}>
+                {uploading ? "Uploading..." : "Upload Image"}
+              </Button>
             </Upload>
+            {imageUrl && (
+              <img
+                src={`https://vigtas.co/uploader-1.0-SNAPSHOT/uploads/${imageUrl}`}
+                alt="Uploaded"
+                style={{ width: 100, marginTop: 10 }}
+              />
+            )}
           </Form.Item>
         </Form>
       </Modal>

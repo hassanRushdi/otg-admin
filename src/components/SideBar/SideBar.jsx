@@ -73,7 +73,7 @@ const SideBar = ({ collapsed }) => {
     getItem((t('students')), '/students', <UserOutlined />, null, '/students'),
     getItem((t('attendance')), '/attendance', <IdcardOutlined />, null, '/attendance'),
     getItem((t('banner')), '/banner', <PictureOutlined />, null, '/banner'),
-    getItem((t('data')), '/data', <DatabaseOutlined />, null, '/data'),
+    getItem((t('satisfaction form')), '/satisfaction-form', <DatabaseOutlined />, null, '/satisfaction-form'),
     getItem((t('students questions')), '/students-questions', <DatabaseOutlined />, null, '/students-questions'),
     getItem((t('Questions Bank')), '/questions-bank', <DatabaseOutlined />, null, '/questions-bank'),
     getItem((t('Exam')), '/exam', <DatabaseOutlined />, null, '/exam'),

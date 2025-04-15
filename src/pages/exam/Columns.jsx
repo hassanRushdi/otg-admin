@@ -1,7 +1,7 @@
 import { MoreOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Menu, Tag } from "antd";
 
-export const examColumns = [
+export const examColumns = (handleAddQuestions) => [
   {
     title: "Exam Title",
     dataIndex: "title_en",
@@ -57,11 +57,13 @@ export const examColumns = [
   {
     title: "Action",
     key: "action",
-    render: () => (
+    render: (_, record) => (
       <Dropdown
         overlay={
           <Menu>
-            <Menu.Item key="edit">Edit</Menu.Item>
+            <Menu.Item key="add-questions" onClick={() => handleAddQuestions(record.exam_id)}>
+              Add Questions
+            </Menu.Item>
           </Menu>
         }
         trigger={["click"]}

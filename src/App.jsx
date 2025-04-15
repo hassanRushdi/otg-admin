@@ -34,8 +34,8 @@ function App() {
           ]
         },
         {
-          path: '/data', children: [
-            { index: true, element: <ProtectedRoutes><Comp.DataPage /></ProtectedRoutes> }
+          path: '/satisfaction-form', children: [
+            { index: true, element: <ProtectedRoutes><Comp.SatisfactionPage /></ProtectedRoutes> }
           ]
         },
 

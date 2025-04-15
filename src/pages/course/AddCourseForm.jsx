@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form, Input, notification, Select } from "antd";
 import { addCourse } from "src/api/course/courseAPI";
 import { formatDateTime } from "@utils/formateDateTime";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const AddCourseForm = ({ onClose, onCourseAdded }) => {
   const [form] = Form.useForm();
   const { Option } = Select;
+  const [description, setDescription] = useState('')
 
   const handleAddCourse = async (values) => {
     const courseData = {
@@ -13,7 +16,7 @@ const AddCourseForm = ({ onClose, onCourseAdded }) => {
       course_program_id: 2,
       discount_id: 1,
       title_en: values.title_en,
-      description_en: values.description_en,
+      description_en: description,
       has_exam: values.has_exam === "true" || values.has_exam === true,
       price: values.price,
       has_discount:
@@ -38,6 +41,7 @@ const AddCourseForm = ({ onClose, onCourseAdded }) => {
         message: "Course Added Successfully!",
       });
       form.resetFields();
+      setDescription("");
       onCourseAdded?.();
       onClose?.();
     } catch (error) {
@@ -47,6 +51,31 @@ const AddCourseForm = ({ onClose, onCourseAdded }) => {
       });
     }
   };
+
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, 3, false] }],
+      ["bold", "italic", "underline", "strike"],
+      [{ color: [] }, { background: [] }],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["link", "image"],
+      ["clean"],
+    ],
+  };
+
+  const formats = [
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "color",
+    "background",
+    "list",
+    "bullet",
+    "link",
+    "image",
+  ];
 
   return (
     <>
@@ -60,14 +89,27 @@ const AddCourseForm = ({ onClose, onCourseAdded }) => {
         </Form.Item>
 
         <Form.Item
-          name="description_en"
-          label="Course Description (English)"
-          rules={[
-            { required: true, message: "Please input course description!" },
-          ]}
-        >
-          <Input.TextArea />
-        </Form.Item>
+        label="Course Description (English)"
+        required
+        rules={[
+          {
+            validator: (_, value) =>
+              description.trim()
+                ? Promise.resolve()
+                : Promise.reject("Please input course description!"),
+          },
+        ]}
+      >
+        <ReactQuill
+          theme="snow"
+          modules={modules}
+          formats={formats}
+          value={description}
+          onChange={setDescription}
+          style={{ height: "200px", marginBottom: "40px" }}
+        />
+      </Form.Item>
+      
         <Form.Item
           name="price"
           label="Price"

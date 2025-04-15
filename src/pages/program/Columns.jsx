@@ -3,7 +3,32 @@ import { Button, Dropdown, Image, Menu } from "antd";
 import { t } from "i18next";
 
 export const Columns = (handleEdit) => [
- 
+  {
+    title: "Program Image",
+    dataIndex: "course_program_image", // Use consistent field name
+    key: "program_image",
+    render: (image) => (
+      image ? (
+        <Image 
+          width={50}
+          src={
+            image.startsWith('http') 
+              ? image 
+              : `https://vigtas.co/uploader-1.0-SNAPSHOT/uploads/${image}`
+          }
+          style={{
+            borderRadius: '50%',
+            objectFit: 'cover'
+          }}
+          preview={{
+            mask: null, // Remove preview mask
+          }}
+        />
+      ) : (
+        <span>No Image</span>
+      )
+    ),
+  },
   {
     title: t('program title'),
     dataIndex: 'course_program_title',
@@ -22,13 +47,13 @@ export const Columns = (handleEdit) => [
         key: 'course_program_status',
         render: (text) => <div>{text === 1 ? "Active" : "Inactive"}</div>, 
     },
-    {
-        title: t('thumbnail'),
-        dataIndex: 'course_program_image',
-        key: 'course_program_image',
-        render: (image) =>
-            image ? <Image width={50} src={`https://vigtas.co/uploads/${image}`} /> : "No Image",
-    }, 
+    // {
+    //     title: t('thumbnail'),
+    //     dataIndex: 'course_program_image',
+    //     key: 'course_program_image',
+    //     render: (image) =>
+    //         image ? <Image width={50} src={`https://vigtas.co/uploads/${image}`} /> : "No Image",
+    // }, 
     {
         title: t("Actions"),
         key: "actions",

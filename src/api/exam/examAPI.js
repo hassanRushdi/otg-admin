@@ -28,3 +28,21 @@ export const addExam = async (examData) => {
     throw new Error(error.response?.data?.message || 'Exam creation failed');
   }
 };
+
+export const addQuestionsWithChoices = async (examId, questionsData) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/add-question-choices-details`,
+      questionsData, // Send the already formatted data directly
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error('Question API Error:', error.response?.data);
+    throw new Error(error.response?.data?.message || 'Error adding questions');
+  }
+};
